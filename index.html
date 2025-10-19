@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UYAG - Your Food Awareness Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FFFBE6;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #88C273;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        header h1 {
+            font-family: 'Poppins', sans-serif;
+            color: #FFFBE6;
+            margin: 0;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li {
+            margin-left: 1rem;
+        }
+        nav ul li a {
+            color: #FFFBE6;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #FFFBE6;
+            margin: 3px 0;
+        }
+        section {
+            padding: 4rem 2rem;
+            margin-top: 80px;
+        }
+        .hero {
+            background: linear-gradient(to right, #88C273, #FFFBE6), url('https://via.placeholder.com/1200x600?text=Ilustrasi+Makanan+Bergizi') no-repeat center/cover;
+            color: #FFFBE6;
+            text-align: center;
+            padding: 6rem 2rem;
+        }
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3rem;
+            margin: 0;
+        }
+        .hero h2 {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        .btn {
+            background-color: #88C273;
+            color: #FFFBE6;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            display: inline-block;
+            margin: 0 0.5rem;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #6BA058;
+        }
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #88C273;
+            color: #88C273;
+        }
+        .btn-outline:hover {
+            background-color: #88C273;
+            color: #FFFBE6;
+        }
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            color: #88C273;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .facts ul {
+            list-style: none;
+            padding: 0;
+        }
+        .facts li {
+            background-color: #FFFBE6;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .tips {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        .tip-card {
+            background-color: #FFFBE6;
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .questionnaire form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #FFFBE6;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .questionnaire label {
+            display: block;
+            margin: 1rem 0 0.5rem;
+            font-weight: 600;
+        }
+        .questionnaire input[type="radio"] {
+            margin-right: 0.5rem;
+        }
+        .questionnaire textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #88C273;
+            border-radius: 5px;
+            resize: vertical;
+        }
+        .cta {
+            text-align: center;
+            background-color: #88C273;
+            color: #FFFBE6;
+            padding: 4rem 2rem;
+        }
+        .cta h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            margin: 0 0 1rem;
+        }
+        footer {
+            background-color: #88C273;
+            color: #FFFBE6;
+            text-align: center;
+            padding: 1rem;
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background-color: #88C273;
+                width: 200px;
+                padding: 1rem;
+            }
+            nav ul.show {
+                display: flex;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>UYAG</h1>
+        <nav>
+            <div class="hamburger" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <ul id="nav-menu">
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#education">Edukasi</a></li>
+                <li><a href="#questionnaire">Kuesioner</a></li>
+                <li><a href="#cta">Ajakan</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <h1>UYAG – Your Food Awareness Guide</h1>
+        <h2>Edukasi & Refleksi Ketahanan Pangan Pribadi</h2>
+        <p>UYAG membantu kamu memahami pentingnya ketahanan pangan (food insecurity) serta mengukur tingkat kepuasan terhadap makanan yang dikonsumsi.</p>
+        <a href="#education" class="btn">Mulai Edukasi 🌾</a>
+        <a href="#questionnaire" class="btn btn-outline">Isi Kuesioner 📋</a>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">Tentang Food Insecurity</h2>
+        <p>Food insecurity adalah kondisi ketika seseorang tidak memiliki akses cukup terhadap makanan yang aman, bergizi, dan terjangkau.</p>
+        <div class="facts">
+            <ul>
+                <li>🍽️ 1 dari 10 orang di dunia masih kekurangan akses makanan bergizi.</li>
+                <li>🌾 Ketahanan pangan dipengaruhi oleh ekonomi, distribusi pangan, dan kesadaran gizi.</li>
+            </ul>
+        </div>
+        <h3>Mengapa Ini Penting?</h3>
+        <ul>
+            <li>💡 Menumbuhkan kesadaran tentang gizi seimbang.</li>
+            <li>💡 Membantu masyarakat memahami pola konsumsi yang lebih sehat.</li>
+        </ul>
+    </section>
+
+    <section id="education">
+        <h2 class="section-title">Edukasi dan Tips</h2>
+        <div class="tips">
+            <div class="tip-card">
+                <h3>Penyebab Food Insecurity</h3>
+                <p>Faktor ekonomi seperti inflasi harga pangan, distribusi yang tidak merata, perubahan iklim, dan kurangnya pendidikan gizi.</p>
+            </div>
+            <div class="tip-card">
+                <h3>Dampak Kekurangan Gizi</h3>
+                <p>Risiko stunting pada anak, penurunan produktivitas, dan masalah kesehatan jangka panjang seperti anemia.</p>
+            </div>
+            <div class="tip-card">
+                <h3>Tips Menjaga Ketahanan Pangan di Rumah</h3>
+                <ul>
+                    <li>Mengurangi sampah makanan dengan merencanakan menu mingguan.</li>
+                    <li>Memilih makanan lokal bergizi seperti sayur-sayuran musiman dan protein nabati.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="questionnaire">
+        <h2 class="section-title">Kuesioner Kepuasan Terhadap Makanan</h2>
+        <form id="survey-form">
+            <label>Seberapa sering kamu kesulitan mendapatkan makanan bergizi?</label>
+            <input type="radio" name="q1" value="Sangat sering"> Sangat sering<br>
+            <input type="radio" name="q1" value="Kadang-kadang"> Kadang-kadang<br>
+            <input type="radio" name="q1" value="Jarang"> Jarang<br>
+            <input type="radio" name="q1" value="Tidak pernah"> Tidak pernah<br>
+
+            <label>Apakah makananmu sudah mencukupi kebutuhan gizi harian?</label>
+            <input type="radio" name="q2" value="Ya, selalu"> Ya, selalu<br>
+            <input type="radio" name="q2" value="Kadang-kadang"> Kadang-kadang<br>
+            <input type="radio" name="q2" value="Tidak, sering kurang"> Tidak, sering kurang<br>
+
+            <label>Seberapa puas kamu dengan kualitas makananmu sehari-hari?</label>
+            <input type="radio" name="q3" value="Sangat puas"> Sangat puas<br>
+            <input type="radio" name="q3" value="Puas"> Puas<br>
+            <input type="radio" name="q3" value="Netral"> Netral<br>
+            <input type="radio" name="q3" value="Tidak puas"> Tidak puas<br>
+
+            <label>Pernahkah kamu mengurangi porsi makan karena alasan ekonomi?</label>
+            <input type="radio" name="q4" value="Ya, sering"> Ya, sering<br>
+            <input type="radio" name="q4" value="Ya, kadang-kadang"> Ya, kadang-kadang<br>
+            <input type="radio" name="q4" value="Tidak pernah"> Tidak pernah<br>
+
+            <label>Apa menurutmu solusi untuk meningkatkan ketahanan pangan di lingkunganmu?</label>
+            <textarea name="q5" placeholder="Tulis pendapatmu di sini..."></textarea>
+
+            <button type="submit" class="btn">Kirim Jawaban</button>
+        </form>
+    </section>
+
+    <section id="cta" class="cta">
+        <h2>Ketahanan pangan dimulai dari kesadaran — dan UYAG hadir untuk menumbuhkannya.</h2>
+        <a href="#education" class="btn">Pelajari Lebih Lanjut 📖</a>
+        <a href="#" class="btn btn-outline" onclick="share()">Bagikan Kesadaran Ini 🌐</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 UYAG. Dibuat untuk edukasi masyarakat.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('nav-menu');
+            menu.classList.toggle('show');
+        }
+
+        document.getElementById('survey-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Terima kasih sudah berpartisipasi!');
+            // Di sini bisa tambahkan logika untuk mengirim data ke server
+        });
+
+        function share() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'UYAG - Your Food Awareness Guide',
+                    text: 'Pelajari tentang ketahanan pangan dan isi kuesioner kepuasan makanan!',
+                    url: window.location.href
+                });
+            } else {
+                alert('Fitur share tidak didukung di browser ini.');
+            }
+        }
+    </script>
+</body>
+</html>
